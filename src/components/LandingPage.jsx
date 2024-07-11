@@ -37,15 +37,14 @@ const LandingPage = () => {
             alt="image"
           />
         </div>
+
         {/* side menu */}
-        <motion.div
-          initial={{ x: open ? 400 : 0 }}
-          animate={{ x: open ? 0 : 400 }}
-          transition={{ duration: 0.3 }}
+        <div
           className={`
-            h-screen w-[80%] fixed top-0 right-0 transition-all duration-300 ease-linear bg-white z-50 rounded-lg`}
-        ></motion.div>
-        ){/* hero */}
+            h-screen w-[80%] sm:hidden fixed top-0 right-0 bg-white z-50 rounded-lg`}
+        ></div>
+
+        {/* hero */}
         <div className="w-full text-center text-white">
           <p className="text-lg font-bold md:text-xl lg:text-2xl bg-gradient-to-b from-gray-400 to-gray-100 text-transparent bg-clip-text">
             The Country of Himalays
@@ -67,8 +66,8 @@ const LandingPage = () => {
             </p>
           </div>
           {/* second side */}
-          <div className="h-full w-full flex items-end">
-            <div className="h-20 w-full flex gap-4 flex-wrap pl-2 backdrop-blur-sm">
+          <div className="h-full w-full flex items-end justify-end">
+            <div className="h-20 w-full items-center flex gap-4 flex-wrap pl-2 backdrop-blur-sm">
               {landingFooterLinks.map((link) => (
                 <>
                   <li
