@@ -41,7 +41,7 @@ const LandingPage = () => {
 
         {/* side menu */}
         <motion.div
-          initial={{ x: open ? 600 : 0 }}
+          initial={{ x: open ? 600 : 0, opacity: 1 }}
           animate={{ x: open ? 0 : 600 }}
           transition={{ duration: 0.5 }}
           className={`
