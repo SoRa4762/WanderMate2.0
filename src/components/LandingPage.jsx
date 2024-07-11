@@ -29,11 +29,31 @@ const LandingPage = () => {
               setOpen(!open);
             }}
           />
+          <Link
+            to="/signup"
+            className="sm:flex hidden pl-4 md:pl-8 text-orange-600 font-bold text-2xl lg:text-4xl hover:cursor-pointer"
+            style={{ textShadow: "4px 4px 4px rgba(0, 0, 0, 0.4)" }}
+          >
+            Explore.
+          </Link>
+          <div className="hidden sm:flex h-full w-full items-center justify-center gap-9 lg:gap-14">
+            {landingHeaderLinks.slice(0, 4).map((item) => (
+              <>
+                <Link
+                  key={item.id}
+                  to={item.link}
+                  className="text-base text-white md:text-lg lg:text-xl hover:border-b-4 hover:border-b-yellow-500"
+                >
+                  {item.title}
+                </Link>
+              </>
+            ))}
+          </div>
           <img
             style={{
               clipPath: "polygon(0 0, 100% 0, 100% 90%, 75% 100%, 0 50%)",
             }}
-            className="h-52 w-40 object-cover"
+            className="h-36 md:h-52 lg:h-64 w-40 sm:w-52 md:w-64 object-cover"
             src={HeaderImage}
             alt="image"
           />
@@ -41,7 +61,7 @@ const LandingPage = () => {
 
         {/* side menu */}
         <motion.div
-          initial={{ x: open ? 600 : 0, opacity: 1 }}
+          initial={{ x: open ? 600 : 0 }}
           animate={{ x: open ? 0 : 600 }}
           transition={{ duration: 0.5 }}
           className={`
@@ -83,13 +103,13 @@ const LandingPage = () => {
             </p>
           </div>
           {/* second side */}
-          <div className="h-full w-full flex items-end justify-end">
-            <div className="h-20 w-full items-center flex gap-4 flex-wrap pl-2 backdrop-blur-sm">
+          <div className="h-full flex items-end justify-end gap-4">
+            <div className="h-16 flex items-center flex-wrap gap-4 md:gap-16 backdrop-blur-sm px-4">
               {landingFooterLinks.map((link) => (
                 <>
                   <li
                     key={link.id}
-                    className="text-white list-none hover:border-b-4 border-yellow-400 "
+                    className="list-none text-white cursor-pointer font-normal hover:border-b-4 hover:border-b-yellow-500"
                   >
                     <a href={link.link}>{link.title}</a>
                   </li>
