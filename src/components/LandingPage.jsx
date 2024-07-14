@@ -107,12 +107,13 @@ const LandingPage = () => {
             <div className="h-16 flex items-center flex-wrap gap-4 md:gap-16 backdrop-blur-sm px-4">
               {landingFooterLinks.map((link) => (
                 <>
-                  <li
+                  <Link
+                    to={link.link}
                     key={link.id}
                     className="list-none text-white cursor-pointer font-normal hover:border-b-4 hover:border-b-yellow-500"
                   >
-                    <a href={link.link}>{link.title}</a>
-                  </li>
+                    {link.title}
+                  </Link>
                 </>
               ))}
             </div>
