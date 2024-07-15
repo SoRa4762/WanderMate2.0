@@ -33,15 +33,15 @@ const SignUp = () => {
 
   return (
     <>
-      <div className="h-screen w-full flex justify-center items-center">
+      <div className="h-screen w-full flex justify-center items-center duration-300">
         <div
-          className="h-full w-full sm:h-[80%] sm:w-[80%] grid sm:grid-cols-2"
+          className="h-full w-full sm:h-[80%] sm:w-[80%] grid sm:grid-cols-2 duration-300"
           style={{ boxShadow: "20px 20px 20px #DEDEDE" }}
         >
           {/* sign up form */}
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col items-center gap-2 md:gap-4 lg:gap-6 justify-center pl-8 pr-8 sm:pl-12 sm:pr-12"
+            className="flex flex-col items-center gap-2 md:gap-4 lg:gap-6 justify-center pl-8 pr-8 sm:pl-12 sm:pr-12 duration-300"
           >
             <h1 className="text-blue-600 text-3xl md:text-4xl lg:text-5xl font-bold">
               Sign Up
@@ -140,7 +140,7 @@ const SignUp = () => {
           </form>
 
           {/* sign up image */}
-          <div className="flex flex-col justify-center items-center pl-8 pr-8 gap-2 md:gap-4 lg:gap-6">
+          <div className="flex flex-col justify-center items-center pl-8 pr-8 gap-2 md:gap-4 lg:gap-6 duration-300">
             <img className="w-11/12" src={SignUpImage} alt="sign up Image" />
             <p className="font-normal">
               Already a Member?{" "}
