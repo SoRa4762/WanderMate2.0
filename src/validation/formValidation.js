@@ -17,3 +17,8 @@ export const signUpSchema = yup.object().shape({
     .bool()
     .oneOf([true], "You must agree to the terms and conditions"),
 });
+
+export const signInSchema = yup.object().shape({
+  username: yup.string().required("Username shall not be empty"),
+  password: yup.string().required("Password shall not be empty"),
+});
