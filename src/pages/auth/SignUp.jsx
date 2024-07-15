@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signUpSchema } from "../validation/formValidation";
-import SignUpImage from "../assets/undraw_signup.svg";
+import { signUpSchema } from "../../validation/formValidation";
+import SignUpImage from "../../assets/undraw_signup.svg";
 
 const SignUp = () => {
   // const [username, setUsername] = useState("");

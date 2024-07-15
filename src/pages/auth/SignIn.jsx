@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { signInSchema } from "../validation/formValidation";
-import SignInImage from "../assets/undraw_signin.svg";
+import { signInSchema } from "../../validation/formValidation";
+import SignInImage from "../../assets/undraw_signin.svg";
 
 const SignIn = () => {
   const {
