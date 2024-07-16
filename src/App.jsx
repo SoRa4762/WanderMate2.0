@@ -2,7 +2,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import SignIn from "./pages/auth/SignIn";
 import SignUp from "./pages/auth/SignUp";
+import UserLayout from "./layouts/UserLayout";
 import Home from "./pages/Home";
+import Destination from "./pages/Destination";
 function App() {
   return (
     <>
@@ -11,7 +13,10 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="/user" element={<UserLayout />}>
+            <Route path="home" element={<Home />} />
+            <Route path="destination" element={<Destination />} />
+          </Route>
         </Routes>
       </Router>
     </>

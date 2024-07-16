@@ -6,15 +6,12 @@ import TopTravelPackage from "../assets/bg5.jpg";
 import TopDestination from "../assets/bg.jpg";
 import bgImg from "../assets/headerImg9.jpg";
 import { IoSearch } from "react-icons/io5";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 
 const Home = () => {
   return (
     <>
-      <div className="px-2 sm:px-4 md:px-8 lg:px-20">
-        <Header />
-
+      {/* home */}
+      <div className="h-full w-full">
         {/* search section */}
         <div
           className="h-[40vh] relative sm:h-[55vh] md:h-[70vh] lg:h-[75vh] mt-8 w-full transition-all duration-300 ease-in-out rounded-lg"
@@ -51,6 +48,7 @@ const Home = () => {
           </div>
         </div>
 
+        {/* cards */}
         <div className="h-full w-full flex flex-col">
           {/* destinations */}
           <div className="h-full w-full flex flex-col pt-4 xl:px-10">
@@ -66,10 +64,10 @@ const Home = () => {
               </h1>
             </div>
             {/* cards */}
-            <Cards data={topDestinations} url={destinationUrl} />
+            <Cards data={topDestinations} />
           </div>
 
-          {/* hotels */}
+          {/* hotel */}
           <div className="h-full w-full flex flex-col pt-4 xl:px-10">
             {/* heading */}
             <div className="flex gap-2 items-center pt-8">
@@ -83,11 +81,11 @@ const Home = () => {
               </h1>
             </div>
             {/* cards */}
-            <Cards data={hotels} url={hotelUrl} />
+            <Cards data={hotels} />
           </div>
 
-          {/* top travel packages */}
-          <div className="h-full w-full flex flex-col xl:px-10">
+          {/* destinations */}
+          <div className="h-full w-full flex flex-col pt-4 xl:px-10">
             {/* heading */}
             <div className="flex gap-2 items-center pt-8">
               <img
@@ -103,7 +101,6 @@ const Home = () => {
             <Cards data={travelPackages} />
           </div>
         </div>
-        <Footer />
       </div>
     </>
   );
