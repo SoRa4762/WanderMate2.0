@@ -5,6 +5,7 @@ import SignUp from "./pages/auth/SignUp";
 import UserLayout from "./layouts/UserLayout";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";
+import PrototypeCarousel from "./components/PrototypeCarousel";
 function App() {
   return (
     <>
@@ -16,6 +17,7 @@ function App() {
           <Route path="/user" element={<UserLayout />}>
             <Route path="home" element={<Home />} />
             <Route path="destination" element={<Destination />} />
+            <Route path="prototypecarousel" element={<PrototypeCarousel />} />
           </Route>
         </Routes>
       </Router>
