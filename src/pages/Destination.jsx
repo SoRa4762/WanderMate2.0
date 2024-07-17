@@ -9,7 +9,7 @@ import TopTravelPackage from "../assets/bg5.jpg";
 import ThingsToDo from "../assets/bg.jpg";
 import Carousel from "../components/Carousel";
 import Cards from "../components/Cards";
-import PrototypeCarousel from "../components/PrototypeCarousel";
+// import PrototypeCarousel from "../components/PrototypeCarousel";
 
 const Destination = () => {
   return (
