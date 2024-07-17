@@ -337,3 +337,156 @@ export const destination = [
     desc: "Dharan, a vibrant city at the foothills of the Mahabharata range, is a gateway to the eastern Himalayas and a melting pot of diverse cultures. Explore the sacred Budha Subba Temple, where wishes are believed to come true, or marvel at the Namaste Falls, cascading down to form a natural 'namaste’. The central Pindeshwor Temple invites you to witness the eternal flame and feel the spiritual energy during the auspicious months1. For breathtaking views, ascend the Vijayapur Hill, and let the panorama of the city and beyond captivate your senses. Whether you’re seeking adventure, spirituality, or simply a taste of local life, Dharan’s rich tapestry of experiences promises an unforgettable journey",
   },
 ];
+
+export const hotelPage = [
+  {
+    id: "1",
+    name: "Hotel Yak & Yeti",
+    price: 120,
+    img: "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/tv5jbv6wn68crhqdjm1b",
+    rating: 5,
+    freeCancellation: true,
+    reserveNow: true,
+    desc: "Hotel Yak & Yeti is a luxurious 5-star hotel located in the heart of Kathmandu, offering world-class amenities and exceptional service. Guests can indulge in the hotel's opulent accommodations, featuring elegantly appointed rooms and suites with modern amenities. The hotel boasts an array of dining options, from fine dining restaurants to casual cafes, catering to diverse culinary preferences. Additionally, it features a state-of-the-art fitness center, a rejuvenating spa, and a stunning outdoor pool, providing guests with ample opportunities for relaxation and rejuvenation.",
+  },
+  {
+    id: "2",
+    name: "Hotel Annapurna",
+    price: 100,
+    img: "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/zgpubhnmahhywx21t1j2",
+    rating: 5,
+    freeCancellation: true,
+    reserveNow: true,
+    desc: "Hotel Annapurna is a renowned 5-star hotel in Kathmandu, offering stunning views of the Himalayas and a range of luxurious amenities. Guests can enjoy the hotel's spacious and elegantly designed rooms, which provide a perfect blend of comfort and style. The hotel features multiple dining options, including a rooftop restaurant with panoramic views of the city and the majestic mountains. Additionally, guests can unwind at the hotel's spa, take a dip in the outdoor pool, or stay active at the well-equipped fitness center.",
+  },
+  {
+    id: "3",
+    name: "Hotel Radisson",
+    price: 80,
+    img: "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/ymdp7tcjizdaoiiytyio",
+    rating: 3,
+    freeCancellation: true,
+    reserveNow: true,
+    desc: "Hotel Radisson is a modern and stylish 5-star hotel located in the heart of Kathmandu, offering exceptional service and a range of amenities. The hotel features contemporary and well-appointed rooms with modern amenities, ensuring a comfortable and luxurious stay for guests. Guests can indulge in a variety of dining options, from international cuisine to local Nepali delicacies, catering to diverse tastes. The hotel also boasts a state-of-the-art fitness center, a relaxing spa, and a rooftop pool with stunning city views, providing guests with ample opportunities for relaxation and rejuvenation.",
+  },
+  {
+    id: "4",
+    name: "Lumbini Garden Retreat",
+    price: 150,
+    img: "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/v1/WanderMate/snng9ztpxqockoxj4v7n",
+    rating: 5,
+    freeCancellation: true,
+    reserveNow: true,
+    desc: "Lumbini Garden Retreat is a peaceful and serene 5-star hotel located in the birthplace of Lord Buddha, offering a tranquil atmosphere and a range of amenities. Guests can immerse themselves in the hotel's serene surroundings, with lush gardens and peaceful courtyards that provide a perfect setting for relaxation and spiritual rejuvenation. The hotel features spacious and elegantly designed rooms, with traditional Nepali touches and modern amenities. Guests can indulge in the hotel's wellness offerings, including yoga and meditation sessions, or explore the nearby UNESCO World Heritage Site of Lumbini, the birthplace of Buddha.",
+  },
+  {
+    id: "5",
+    name: "Hyatt Regency",
+    price: 180,
+    img: "https://r2imghtlak.mmtcdn.com/r2-mmt-htl-image/htl-imgs/6608967321245190-d9dabdf82d2611eabcfc0242ac110003.jpg",
+    rating: 4,
+    freeCancellation: true,
+    reserveNow: true,
+    desc: "Hyatt Regency is a luxurious 4-star hotel located in Kathmandu, offering modern amenities, exceptional service, and a range of dining options. The hotel features stylish and contemporary rooms with modern amenities, ensuring a comfortable and enjoyable stay for guests. Guests can indulge in a variety of dining experiences, from international cuisine to local Nepali delicacies, catering to diverse tastes. The hotel also boasts a state-of-the-art fitness center, a relaxing spa, and an outdoor pool, providing guests with ample opportunities for relaxation and rejuvenation.",
+  },
+];
+
+export const travelPackagesPage = [
+  {
+    id: "6",
+    name: "Marriott Hotel",
+    price: 200,
+    img: "https://royalcollege.edu.np/wp-content/uploads/2020/04/HQ5A8705_20190611131701.jpg",
+    rating: 5,
+    freeCancellation: false,
+    reserveNow: true,
+    desc: "Marriott Hotel is a world-renowned 5-star hotel located in Kathmandu, offering luxurious accommodations, exceptional service, and a range of amenities. Guests can indulge in the hotel's opulent rooms and suites, featuring elegant decor, modern amenities, and stunning views of the city or the Himalayas. The hotel boasts multiple dining options, from fine dining restaurants to casual cafes, catering to diverse culinary preferences. Additionally, guests can unwind at the hotel's spa, stay active at the well-equipped fitness center, or take a dip in the outdoor pool, surrounded by lush gardens.",
+  },
+  {
+    id: "7",
+    name: "Soaltee Crowne Plaza",
+    price: 160,
+    img: "https://lh4.googleusercontent.com/proxy/cguEeVMN81BkYeeUl8EpVCzts4PTtUcx1H2TSsw-5hzcHhYY3-DvdZviVpr3GrzSLAE4cG7qNqE",
+    rating: 4,
+    freeCancellation: true,
+    reserveNow: false,
+    desc: "Soaltee Crowne Plaza is a 4-star hotel located in Kathmandu, offering comfortable accommodations, a range of amenities, and exceptional service. The hotel features well-appointed rooms with modern amenities, ensuring a comfortable and enjoyable stay for guests. Guests can indulge in a variety of dining options, from international cuisine to local Nepali delicacies, catering to diverse tastes. The hotel also boasts a fitness center, a relaxing spa, and an outdoor pool, providing guests with ample opportunities for relaxation and rejuvenation.",
+  },
+];
+
+export const reviews = [
+  {
+    id: "1",
+    hotelId: "1",
+    rating: 5,
+    comment: "Great place to stay",
+    user: "User name",
+    date: "2020-01-01",
+    userImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/juzdfyafpfijrb8nhkfa",
+  },
+  {
+    id: "2",
+    hotelId: "3",
+    rating: 5,
+    comment: "Great place to stay",
+    user: "User name",
+    date: "2020-01-01",
+    userImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/juzdfyafpfijrb8nhkfa",
+  },
+  {
+    id: "3",
+    hotelId: "2",
+    rating: 5,
+    comment: "Great place to stay",
+    user: "User name",
+    date: "2020-01-01",
+    userImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/juzdfyafpfijrb8nhkfa",
+  },
+  {
+    id: "4",
+    hotelId: "1",
+    rating: 5,
+    comment: "Great place to stay",
+    user: "User name",
+    date: "2020-01-01",
+    userImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/juzdfyafpfijrb8nhkfa",
+  },
+  {
+    id: "5",
+    hotelId: "1",
+    rating: 5,
+    comment: "Great place to stay",
+    user: "User name",
+    date: "2020-01-01",
+    userImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/juzdfyafpfijrb8nhkfa",
+  },
+  {
+    id: "6",
+    hotelId: "1",
+    rating: 5,
+    comment: "Great place to stay",
+    user: "User name",
+    date: "2020-01-01",
+    userImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/f_auto,q_auto/juzdfyafpfijrb8nhkfa",
+  },
+];
+
+export const userData = [
+  {
+    id: "1",
+    name: "sora",
+    email: "user@gmail.com",
+    password: "passuuserUwU",
+    image:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/v1719430781/ekmdys34ldonak4gbrdz.jpg",
+    coverImage:
+      "https://res.cloudinary.com/soragatrasambandha/image/upload/v1719430786/yyzbkc6drznfthfadwzc.jpg",
+    bio: "My name is Sora because I was born during a thunderstorm, and 'Sora' means 'sky' in Japanese. The raging storm outside was a powerful force of nature, and my parents wanted to give me a name that reflected the majesty and beauty of the sky.",
+  },
+];
