@@ -37,7 +37,7 @@ const Header = () => {
           animate={{ x: showSideMenu ? 0 : 600 }}
           transition={{ duration: 0.5 }}
           className={`
-            h-screen w-[80%] sm:hidden fixed top-0 right-0 bg-white z-50 rounded-lg`}
+            h-screen w-[80%] md:hidden fixed top-0 right-0 bg-white z-50 rounded-lg`}
         >
           {headerLinks.map((item) => (
             <div key={item.id}>
@@ -46,7 +46,7 @@ const Header = () => {
                 cursor-pointer hover:bg-gray-100 hover:rounded-lg"
                 to={item.link}
               >
-                {item.title}
+                {item.linkTitle}
               </Link>
             </div>
           ))}
