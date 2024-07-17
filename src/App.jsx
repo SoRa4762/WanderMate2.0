@@ -6,6 +6,9 @@ import UserLayout from "./layouts/UserLayout";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";
 import PrototypeCarousel from "./components/PrototypeCarousel";
+import TravelPackages from "./pages/TravelPackages";
+import Hotels from "./pages/Hotels";
+import NotFound from "./pages/NotFound";
 function App() {
   return (
     <>
@@ -17,7 +20,9 @@ function App() {
           <Route path="/user" element={<UserLayout />}>
             <Route path="home" element={<Home />} />
             <Route path="destination" element={<Destination />} />
-            <Route path="prototypecarousel" element={<PrototypeCarousel />} />
+            <Route path="travelpackages" element={<TravelPackages />} />
+            <Route path="hotels" element={<Hotels />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>
