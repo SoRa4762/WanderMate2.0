@@ -1,7 +1,8 @@
-const Hotels = () => {
-  return (
-    <div>Hotels</div>
-  )
-}
+import HCard from "../components/HCard";
+import { hotelPage } from "../helper/data";
 
-export default Hotels
+const Hotels = () => {
+  return <HCard data={hotelPage} />;
+};
+
+export default Hotels;

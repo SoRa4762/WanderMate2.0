@@ -1,7 +1,8 @@
-const TravelPackages = () => {
-  return (
-    <div>TravelPackages</div>
-  )
-}
+import HCard from "../components/HCard";
+import { travelPackagesPage } from "../helper/data";
 
-export default TravelPackages
+const TravelPackages = () => {
+  return <HCard data={travelPackagesPage} />;
+};
+
+export default TravelPackages;
