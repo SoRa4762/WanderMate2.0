@@ -1,12 +1,14 @@
 import { useState } from "react";
 import userProfile from "../assets/userProfile.jpg";
 import { headerLinks } from "../helper/data";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { motion } from "framer-motion";
 
 const Header = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  // console.log(location.pathname);
   const [showLogout, setShowLogout] = useState(false);
   const [showSideMenu, setShowSideMenu] = useState(false);
 
@@ -42,8 +44,10 @@ const Header = () => {
           {headerLinks.map((item) => (
             <div key={item.id}>
               <Link
-                className="flex font-bold text-gray-500 text-lg pl-4 py-1 
-                cursor-pointer hover:bg-gray-100 hover:rounded-lg"
+                className={`${
+                  location.pathname === item.link && "bg-gray-100"
+                } flex font-bold text-gray-500 text-lg pl-4 py-1 
+                cursor-pointer hover:bg-gray-100 hover:rounded-lg`}
                 to={item.link}
               >
                 {item.linkTitle}
@@ -59,7 +63,9 @@ const Header = () => {
           {headerLinks.map((nav, index) => (
             <li
               key={index}
-              className="list-none cursor-pointer lg:text-xl hover:border-b-4 hover:border-b-blue-600"
+              className={`${
+                location.pathname === nav.link && "border-b-blue-600 border-b-4"
+              } list-none cursor-pointer lg:text-xl hover:border-b-4 hover:border-b-blue-600`}
             >
               <a href={nav.link}>{nav.linkTitle}</a>
             </li>
