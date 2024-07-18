@@ -15,7 +15,7 @@ const HCard = ({ data }) => {
             {/* lg */}
             <div className="flex-1">
               <img
-                src={item.img}
+                src={item.img[0]}
                 alt="img"
                 className="h-full w-full object-cover rounded-l-md"
               />
@@ -24,10 +24,7 @@ const HCard = ({ data }) => {
               <p>{item.name}</p>
               <div className="flex flex-col text-center gap-2">
                 <p>$ {item.price}</p>
-                <Link
-                  //   to={`/${url}/${item.id}`}
-                  className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-1 rounded-md font-medium"
-                >
+                <Link className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-1 rounded-md font-medium">
                   View Deal
                 </Link>
                 {/* <div>
