@@ -1,7 +1,8 @@
+import { useState, useEffect } from "react";
 import {
-  hotels,
-  travelPackages,
-  thingsToDo,
+  // hotels,
+  // travelPackages,
+  // thingsToDo,
   destination,
 } from "../helper/data";
 import TopHotels from "../assets/bg2.jpg";
@@ -10,8 +11,33 @@ import ThingsToDo from "../assets/bg.jpg";
 import Carousel from "../components/Carousel";
 import Cards from "../components/Cards";
 // import PrototypeCarousel from "../components/PrototypeCarousel";
+import { getHotels, getTravelPackages, getThingsToDo } from "../api";
 
 const Destination = () => {
+  const [hotels, setHotels] = useState([]);
+  const [travelPackages, setTravelPackages] = useState([]);
+  const [thingsToDo, setThingsToDo] = useState([]);
+
+  useEffect(() => {
+    const fetchHotels = async () => {
+      const data = await getHotels();
+      setHotels(data);
+    };
+
+    const travelPackages = async () => {
+      const data = await getTravelPackages();
+      setTravelPackages(data);
+    };
+
+    const thingsToDo = async () => {
+      const data = await getThingsToDo();
+      setThingsToDo(data);
+    };
+
+    fetchHotels();
+    travelPackages();
+    thingsToDo();
+  }, []);
   return (
     <>
       <div className="h-full w-full">
