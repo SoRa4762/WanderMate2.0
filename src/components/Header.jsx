@@ -56,7 +56,7 @@ const Header = () => {
           ))}
         </motion.div>
 
-        <a href="/home" className="hidden md:flex text-blue-600">
+        <a href="/user/home" className="hidden md:flex text-blue-600">
           WanderMate
         </a>
         <div className="hidden md:flex md:gap-4 lg:gap-8 items-center">

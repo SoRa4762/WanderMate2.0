@@ -24,6 +24,7 @@ function App() {
             <Route path="hotels" element={<Hotels />} />
             <Route path="*" element={<NotFound />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </>
