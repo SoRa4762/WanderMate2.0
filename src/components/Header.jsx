@@ -91,7 +91,7 @@ const Header = () => {
           {showLogout && (
             <div className="absolute right-0 mt-2 w-32 bg-white shadow-lg rounded-lg z-10">
               <a
-                href="/user/1"
+                href="/user/profile/1"
                 className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-200"
               >
                 Profile
