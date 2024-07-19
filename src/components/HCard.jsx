@@ -1,6 +1,3 @@
-// import { CiHeart } from "react-icons/ci";
-
-// import StarRating from "../elements/StarRating";
 import { Link } from "react-router-dom";
 import StarRating from "../elements/StarRating";
 const HCard = ({ data }) => {
@@ -24,7 +21,10 @@ const HCard = ({ data }) => {
               <p>{item.name}</p>
               <div className="flex flex-col text-center gap-2">
                 <p>$ {item.price}</p>
-                <Link className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-1 rounded-md font-medium">
+                <Link
+                  className="bg-blue-600 hover:bg-blue-800 text-white px-8 py-1 rounded-md font-medium"
+                  to={`${item.id}`}
+                >
                   View Deal
                 </Link>
                 {/* <div>
