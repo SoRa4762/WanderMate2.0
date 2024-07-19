@@ -5,7 +5,6 @@ import SignUp from "./pages/auth/SignUp";
 import UserLayout from "./layouts/UserLayout";
 import Home from "./pages/Home";
 import Destination from "./pages/Destination";
-import PrototypeCarousel from "./components/PrototypeCarousel";
 import TravelPackages from "./pages/TravelPackages";
 import Hotels from "./pages/Hotels";
 import NotFound from "./pages/NotFound";

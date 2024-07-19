@@ -14,6 +14,10 @@ import Cards from "../components/Cards";
 import { getHotels, getTravelPackages, getThingsToDo } from "../api";
 
 const Destination = () => {
+  const hotelUrl = "/user/hotels";
+  const travelPackagesUrl = "/user/travelPackages";
+  const thingsToDoUrl = "/user/thingsToDo";
+
   const [hotels, setHotels] = useState([]);
   const [travelPackages, setTravelPackages] = useState([]);
   const [thingsToDo, setThingsToDo] = useState([]);
@@ -61,7 +65,7 @@ const Destination = () => {
               </h1>
             </div>
             {/* cards */}
-            <Cards data={hotels} />
+            <Cards data={hotels} url={hotelUrl} />
           </div>
 
           {/* top travel packages */}
@@ -78,7 +82,7 @@ const Destination = () => {
               </h1>
             </div>
             {/* cards */}
-            <Cards data={travelPackages} />
+            <Cards data={travelPackages} url={travelPackagesUrl} />
           </div>
 
           {/* things to do */}
@@ -95,7 +99,7 @@ const Destination = () => {
               </h1>
             </div>
             {/* cards */}
-            <Cards data={thingsToDo} />
+            <Cards data={thingsToDo} url={thingsToDoUrl} />
           </div>
         </div>
       </div>

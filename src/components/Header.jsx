@@ -37,9 +37,10 @@ const Header = () => {
         <motion.div
           initial={{ x: showSideMenu ? 600 : 0 }}
           animate={{ x: showSideMenu ? 0 : 600 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0 }}
           className={`
-            h-screen w-[80%] md:hidden fixed top-0 right-0 bg-white z-50 rounded-lg`}
+            ${showSideMenu ? "opacity-1" : "opacity-0"}
+            h-screen w-[80%] md:hidden fixed top-0 right-0 bg-white z-50 rounded-lg transition-all duration-700`}
         >
           {headerLinks.map((item) => (
             <div key={item.id}>
