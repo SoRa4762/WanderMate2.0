@@ -3,12 +3,21 @@ import { RxCross2 } from "react-icons/rx";
 import { TbCameraHeart } from "react-icons/tb";
 import { useState } from "react";
 
-const Modal = ({ openModal, setOpenModal, userId, profileImg, coverImg }) => {
+const Modal = ({
+  openModal,
+  setOpenModal,
+  userId,
+  profileImg,
+  coverImg,
+  username,
+  bio,
+}) => {
   const [profilePicture, setProfilePicture] = useState(profileImg);
   const [coverPhoto, setCoverPhoto] = useState(coverImg);
   const [profilePictureChanged, setProfilePictureChanged] = useState(false);
   const [coverPhotoChanged, setCoverPhotoChanged] = useState(false);
-
+  const [changeUsername, setChangeUsername] = useState(username);
+  const [changeBio, setChangeBio] = useState(bio);
   return (
     <>
       {openModal && (
@@ -113,12 +122,20 @@ const Modal = ({ openModal, setOpenModal, userId, profileImg, coverImg }) => {
                   type="text"
                   placeholder="Name"
                   maxLength={50}
+                  value={changeUsername}
+                  onChange={(e) => {
+                    setChangeUsername(e.target.value);
+                  }}
                   className="h-14 w-full border border-black rounded-sm p-4 focus:outline-none focus:border-blue-600"
                 />
                 <textarea
                   type="text"
                   placeholder="Bio"
                   maxLength={160}
+                  value={changeBio}
+                  onChange={(e) => {
+                    setChangeBio(e.target.value);
+                  }}
                   className="h-24 w-full border border-black rounded-sm p-4 focus:outline-none focus:border-blue-600"
                 />
                 <input
