@@ -1,13 +1,11 @@
 import { GoArrowLeft } from "react-icons/go";
 import { RxCross2 } from "react-icons/rx";
 import { TbCameraHeart } from "react-icons/tb";
-import profileP from "../assets/Beach.jpg";
-import coverP from "../assets/Beach1.jpg";
 import { useState } from "react";
 
-const Modal = ({ openModal, setOpenModal, userId }) => {
-  const [profilePicture, setProfilePicture] = useState(profileP);
-  const [coverPhoto, setCoverPhoto] = useState(coverP);
+const Modal = ({ openModal, setOpenModal, userId, profileImg, coverImg }) => {
+  const [profilePicture, setProfilePicture] = useState(profileImg);
+  const [coverPhoto, setCoverPhoto] = useState(coverImg);
   const [profilePictureChanged, setProfilePictureChanged] = useState(false);
   const [coverPhotoChanged, setCoverPhotoChanged] = useState(false);
 

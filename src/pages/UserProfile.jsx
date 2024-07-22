@@ -84,7 +84,12 @@ const UserProfile = () => {
           </div>
 
           {/* Modal */}
-          <Modal openModal={openModal} setOpenModal={setOpenModal} />
+          <Modal
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+            coverImg={user.coverImage}
+            profileImg={user.img}
+          />
         </div>
       )}
     </>
