@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import Destination from "./pages/Destination";
 import TravelPackages from "./pages/TravelPackages";
 import Hotels from "./pages/Hotels";
+import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Route path="destination" element={<Destination />} />
             <Route path="travelpackages" element={<TravelPackages />} />
             <Route path="hotels" element={<Hotels />} />
+            <Route path="profile/:userId" element={<UserProfile />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="*" element={<NotFound />} />
