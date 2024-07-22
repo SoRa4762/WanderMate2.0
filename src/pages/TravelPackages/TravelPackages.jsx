@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import HCard from "../components/HCard";
+import HCard from "../../components/HCard";
 // import { travelPackagesPage } from "../helper/data";
-import { getTravelPackages } from "../api";
+import { getTravelPackages } from "../../api";
 
 const TravelPackages = () => {
   const [travelPackages, setTravelPackages] = useState([]);

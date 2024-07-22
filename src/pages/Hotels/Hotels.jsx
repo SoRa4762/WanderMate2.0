@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import HCard from "../components/HCard";
-import { getHotels } from "../api";
+import HCard from "../../components/HCard";
+import { getHotels } from "../../api";
 // import { hotelPage } from "../helper/data";
 
 const Hotels = () => {

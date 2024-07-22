@@ -22,6 +22,16 @@ export const getHotel = async (id) => {
   }
 };
 
+export const getHotelReview = async (id) => {
+  try {
+    const response = await axios.get(`${jsonUrl}/reviews?hotelId=${id}`);
+    const data = await response.data;
+    return data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 //travel packages
 export const getTravelPackages = async () => {
   try {
