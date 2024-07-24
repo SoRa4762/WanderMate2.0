@@ -490,3 +490,31 @@ export const userData = [
     bio: "My name is Sora because I was born during a thunderstorm, and 'Sora' means 'sky' in Japanese. The raging storm outside was a powerful force of nature, and my parents wanted to give me a name that reflected the majesty and beauty of the sky.",
   },
 ];
+
+export const adminSidebar = [
+  {
+    id: 1,
+    to: "/admin/dashboard",
+    name: "Dashboard",
+  },
+  {
+    id: 2,
+    to: "/admin/manage-hotels",
+    name: "Hotels",
+  },
+  {
+    id: 3,
+    to: "/admin/manage-packages",
+    name: "Travel Packages",
+  },
+  {
+    id: 4,
+    to: "/admin/manage-bookings",
+    name: "Bookings",
+  },
+  {
+    id: 5,
+    to: "/admin/manage-reviews",
+    name: "Reviews",
+  },
+];
