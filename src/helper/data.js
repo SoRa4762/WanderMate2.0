@@ -494,27 +494,27 @@ export const userData = [
 export const adminSidebar = [
   {
     id: 1,
-    to: "/admin/dashboard",
+    to: "/dashboard/dashboard",
     name: "Dashboard",
   },
   {
     id: 2,
-    to: "/admin/manage-hotels",
+    to: "/dashboard/manage-hotels",
     name: "Hotels",
   },
   {
     id: 3,
-    to: "/admin/manage-packages",
+    to: "/dashboard/manage-packages",
     name: "Travel Packages",
   },
   {
     id: 4,
-    to: "/admin/manage-bookings",
+    to: "/dashboard/manage-bookings",
     name: "Bookings",
   },
   {
     id: 5,
-    to: "/admin/manage-reviews",
+    to: "/dashboard/manage-reviews",
     name: "Reviews",
   },
 ];

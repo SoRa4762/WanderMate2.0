@@ -6,7 +6,6 @@ import { useState } from "react";
 const Modal = ({
   openModal,
   setOpenModal,
-  userId,
   profileImg,
   coverImg,
   username,

@@ -11,6 +11,9 @@ import Hotels from "./pages/Hotels/Hotels";
 import Hotel from "./pages/Hotels/Hotel";
 import UserProfile from "./pages/UserProfile";
 import NotFound from "./pages/NotFound";
+import DashboardLayout from "./layouts/DashboardLayout";
+import ManageHotels from "./pages/Dashboard/ManageHotels";
+import ManageTravelPackages from "./pages/Dashboard/ManageTravelPackages";
 function App() {
   return (
     <>
@@ -27,6 +30,11 @@ function App() {
             <Route path="hotels" element={<Hotels />} />
             <Route path="hotels/:id" element={<Hotel />} />
             <Route path="profile/:userId" element={<UserProfile />} />
+            <Route path="*" element={<NotFound />} />
+          </Route>
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route path="manage-hotels" element={<ManageHotels />} />
+            <Route path="manage-packages" element={<ManageTravelPackages />} />
             <Route path="*" element={<NotFound />} />
           </Route>
           <Route path="*" element={<NotFound />} />
