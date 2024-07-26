@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { getHotels } from "../../api";
+import axios from "axios";
+import DeleteModal from "../../elements/DeleteModal";
 
 const ManageHotels = () => {
   const [hotels, setHotels] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
   const [currentHotel, setCurrentHotel] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [id, setId] = useState();
 
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -14,12 +19,13 @@ const ManageHotels = () => {
   const [reserveNow, setReserveNow] = useState(false);
   const [description, setDescription] = useState("");
 
-  useEffect(() => {
-    const fetchHotels = async () => {
-      const response = await getHotels();
-      setHotels(response);
-    };
+  //fetching data
+  const fetchHotels = async () => {
+    const response = await getHotels();
+    setHotels(response);
+  };
 
+  useEffect(() => {
     fetchHotels();
   }, []);
 
@@ -30,6 +36,94 @@ const ManageHotels = () => {
 
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
+  const handleEdit = (hotel) => {
+    setIsEditing(true);
+    setCurrentHotel(hotel);
+    setName(hotel.name);
+    setPrice(hotel.price);
+    setImages(hotel.img);
+    setFreeCancellation(hotel.freeCancellation);
+    setReserveNow(hotel.reserveNow);
+    setDescription(hotel.desc);
+  };
+
+  const uploadImagesToCloudinary = async () => {
+    const cloudinaryUrl =
+      "https://api.cloudinary.com/v1_1/soragatrasambandha/image/upload";
+    const uploadPreset = "syzx315g";
+
+    const imageUrls = await Promise.all(
+      images.map(async (image) => {
+        const formData = new FormData();
+        formData.append("file", image);
+        formData.append("upload_preset", uploadPreset);
+
+        const response = await axios.post(cloudinaryUrl, formData);
+        return response.data.secure_url;
+      })
+    );
+
+    return imageUrls;
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // const imageUrl = await uploadImagesToCloudinary();
+    // console.log(`Uploaded images: ${imageUrl}`);
+
+    const hotelData = {
+      id: isEditing ? currentHotel.id : toString(hotels.length + 1),
+      name: name,
+      price: price,
+      img: images,
+      freeCancellation: freeCancellation,
+      reserveNow: reserveNow,
+      desc: description,
+    };
+
+    setLoading(true);
+    const uploadData = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:3000/hotels",
+          hotelData
+        );
+        setLoading(false);
+        fetchHotels();
+        resetForm();
+        console.log("This is the response: ", response);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    };
+
+    uploadData();
+  };
+
+  const resetForm = () => {
+    setName("");
+    setPrice("");
+    setImages([]);
+    setFreeCancellation(false);
+    setReserveNow(false);
+    setDescription("");
+    setCurrentHotel(null);
+    setIsEditing(false);
+  };
+
+  const handleDelete = async (id) => {
+    // setHotels((prevHotel) => prevHotel.filter((hotel) => hotel.id !== id));
+    try {
+      const response = await axios.delete(`http://localhost:3000/hotels/${id}`);
+      console.log(response);
+      fetchHotels();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -43,14 +137,14 @@ const ManageHotels = () => {
         <h1 className="text-3xl font-bold mb-4">
           {isEditing ? "Edit Hotel" : "Add New Hotel"}
         </h1>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <div className="mb-4">
             <label className="block text-gray-700">Name</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border-2 rounded focus:outline-none focus:border-2 focus:border-blue-500"
               required
             />
           </div>
@@ -60,7 +154,7 @@ const ManageHotels = () => {
               type="number"
               value={price}
               onChange={(e) => setPrice(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border-2 rounded focus:outline-none focus:border-2 focus:border-blue-500"
               required
             />
           </div>
@@ -71,14 +165,19 @@ const ManageHotels = () => {
               multiple
               onChange={handleImageChange}
               className="w-full p-2 border rounded"
-              required
             />
           </div>
           <div className="mb-4 flex flex-wrap gap-2">
             {images.map((image, index) => (
               <div key={index} className="relative">
+                {/* {console.log(image)}
+                {console.log(typeof image)} */}
                 <img
-                  src={URL.createObjectURL(image)}
+                  src={`${
+                    typeof image === "string"
+                      ? image
+                      : URL.createObjectURL(image)
+                  }`}
                   alt={`preview-${index}`}
                   className="h-24 w-24 object-cover rounded"
                 />
@@ -115,13 +214,15 @@ const ManageHotels = () => {
             <textarea
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border-2 rounded focus:outline-none focus:border-2 focus:border-blue-500"
               required
             />
           </div>
           <button
             type="submit"
-            className="bg-blue-500 text-white py-2 px-4 rounded"
+            className={`bg-blue-500 text-white py-2 px-4 rounded ${
+              loading ? "cursor-not-allowed bg-blue-300" : "cursor-pointer"
+            }`}
           >
             {isEditing ? "Update Hotel" : "Add Hotel"}
           </button>
@@ -144,7 +245,7 @@ const ManageHotels = () => {
                   <td className="border px-4 py-2">{hotel.price}</td>
                   <td className="border px-4 py-2">
                     <button
-                      // onClick={() => handleEdit(hotel)}
+                      onClick={() => handleEdit(hotel)}
                       className="bg-green-500 text-white py-1 px-3 rounded mr-2"
                     >
                       Edit
@@ -152,6 +253,10 @@ const ManageHotels = () => {
                   </td>
                   <td className="border px-4 py-2">
                     <button
+                      onClick={() => {
+                        setOpen(true);
+                        setId(hotel.id);
+                      }}
                       // onClick={() => handleDelete(hotel.id)}
                       className="bg-red-500 text-white py-1 px-3 rounded mr-2"
                     >
@@ -163,6 +268,13 @@ const ManageHotels = () => {
             </tbody>
           </table>
         </div>
+
+        <DeleteModal
+          open={open}
+          setOpen={setOpen}
+          handleDelete={handleDelete}
+          id={id}
+        />
       </div>
     </motion.div>
   );

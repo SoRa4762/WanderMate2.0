@@ -15,14 +15,14 @@ const DashboardSidebar = () => {
       {/* triggerable sidebar */}
       <div
         className={`${
-          open && "hidden"
-        } lg:hidden flex justify-center items-center border-2 h-10 w-10 border-black rounded-sm cursor-pointer`}
+          !open && "hidden"
+        } flex justify-center items-center border-2 h-10 w-10 border-black rounded-sm cursor-pointer`}
         onClick={toggleSidebar}
       >
         <RxHamburgerMenu className="w-6 h-6 flex" />
       </div>
 
-      <motion.div
+      {/* <motion.div
         initial={{ x: open ? -430 : 0 }}
         animate={{ x: open ? 0 : -430 }}
         transition={{ duration: 0 }}
@@ -62,12 +62,14 @@ const DashboardSidebar = () => {
             </Link>
           </div>
         ))}
-      </motion.div>
+      </motion.div> */}
 
       {/* hide when screen not lg */}
       <div
         className={`
-            hidden h-screen sticky top-0 left-0 w-64 lg:flex flex-col bg-gray-700 transition-all duration-700`}
+          ${open && "hidden"}
+            h-screen sticky top-0 left-0 w-64 flex flex-col bg-gray-700 transition-all duration-700 cursor-pointer select-none`}
+        onClick={toggleSidebar}
       >
         <h1 className="flex justify-center text-xl sm:text-2xl font-bold text-white pl-4 py-8">
           WanderMate
