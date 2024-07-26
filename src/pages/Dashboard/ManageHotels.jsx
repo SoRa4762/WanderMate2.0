@@ -55,14 +55,16 @@ const ManageHotels = () => {
     const uploadPreset = "syzx315g";
 
     const imageUrls = await Promise.all(
-      images.map(async (image) => {
-        const formData = new FormData();
-        formData.append("file", image);
-        formData.append("upload_preset", uploadPreset);
+      images
+        .filter((image) => image instanceof Blob || image instanceof File)
+        .map(async (image) => {
+          const formData = new FormData();
+          formData.append("file", image);
+          formData.append("upload_preset", uploadPreset);
 
-        const response = await axios.post(cloudinaryUrl, formData);
-        return response.data.secure_url;
-      })
+          const response = await axios.post(cloudinaryUrl, formData);
+          return response.data.secure_url;
+        })
     );
 
     return imageUrls;
@@ -70,21 +72,26 @@ const ManageHotels = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    // const imageUrl = await uploadImagesToCloudinary();
-    // console.log(`Uploaded images: ${imageUrl}`);
+    const imageUrl = await uploadImagesToCloudinary();
+    console.log(`Uploaded images: ${imageUrl}`);
 
     const hotelData = {
-      id: isEditing ? currentHotel.id : toString(hotels.length + 1),
+      id: isEditing ? currentHotel.id : String(hotels.length + 1),
       name: name,
       price: price,
-      img: images,
+      img: isEditing
+        ? [
+            ...images.filter((item) => Object.keys(item).length !== 0),
+            ...imageUrl.filter((item) => Object.keys(item).length !== 0),
+          ]
+        : imageUrl.filter((item) => Object.keys(item).length !== 0),
       freeCancellation: freeCancellation,
       reserveNow: reserveNow,
       desc: description,
     };
 
-    setLoading(true);
     const uploadData = async () => {
       try {
         const response = await axios.post(
@@ -101,7 +108,23 @@ const ManageHotels = () => {
       }
     };
 
-    uploadData();
+    const editData = async () => {
+      try {
+        const response = await axios.put(
+          `http://localhost:3000/hotels/${currentHotel.id}`,
+          hotelData
+        );
+        setLoading(false);
+        fetchHotels();
+        resetForm();
+        console.log("This is the response: ", response);
+      } catch (err) {
+        console.log(err);
+        setLoading(false);
+      }
+    };
+
+    isEditing ? editData() : uploadData();
   };
 
   const resetForm = () => {
@@ -170,13 +193,11 @@ const ManageHotels = () => {
           <div className="mb-4 flex flex-wrap gap-2">
             {images.map((image, index) => (
               <div key={index} className="relative">
-                {/* {console.log(image)}
-                {console.log(typeof image)} */}
                 <img
                   src={`${
-                    typeof image === "string"
-                      ? image
-                      : URL.createObjectURL(image)
+                    image instanceof Blob || image instanceof File
+                      ? URL.createObjectURL(image)
+                      : image
                   }`}
                   alt={`preview-${index}`}
                   className="h-24 w-24 object-cover rounded"
