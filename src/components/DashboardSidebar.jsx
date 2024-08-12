@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { adminSidebar } from "../helper/data";
 import { Link, useLocation } from "react-router-dom";
-import { RxHamburgerMenu, RxCross2 } from "react-icons/rx";
+import { RxHamburgerMenu,  } from "react-icons/rx";
 
 const DashboardSidebar = () => {
   const location = useLocation();

@@ -1,17 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { getHotels } from "../../api";
 import axios from "axios";
 import DeleteModal from "../../elements/DeleteModal";
 
 const ManageHotels = () => {
+  // State variables
   const [hotels, setHotels] = useState([]);
   const [isEditing, setIsEditing] = useState(false);
-  const [currentHotel, setCurrentHotel] = useState(null);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const [id, setId] = useState();
-
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [images, setImages] = useState([]);
@@ -19,91 +18,114 @@ const ManageHotels = () => {
   const [reserveNow, setReserveNow] = useState(false);
   const [description, setDescription] = useState("");
 
-  //fetching data
+  // Ref for resetting form data for image input field
+  const imageInputRef = useRef(null);
+
+  // Fetch hotels from API
   const fetchHotels = async () => {
-    const response = await getHotels();
-    setHotels(response);
+    try {
+      const response = await getHotels();
+      setHotels(response);
+      console.log("Fetched hotels:", response);
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
+    }
   };
 
   useEffect(() => {
     fetchHotels();
   }, []);
 
+  // Handle image changes
   const handleImageChange = (e) => {
     const selectedFiles = Array.from(e.target.files);
     setImages((prevImages) => [...prevImages, ...selectedFiles]);
+    console.log("Images added:", selectedFiles);
   };
 
+  // Remove image
   const handleRemoveImage = (index) => {
     setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+    console.log(`Image at index ${index} removed`);
   };
-
-  const handleEdit = (hotel) => {
-    setIsEditing(true);
-    setCurrentHotel(hotel);
-    setName(hotel.name);
-    setPrice(hotel.price);
-    setImages(hotel.img);
-    setFreeCancellation(hotel.freeCancellation);
-    setReserveNow(hotel.reserveNow);
-    setDescription(hotel.desc);
-  };
-
-  const uploadImagesToCloudinary = async () => {
+  // Upload images to Cloudinary
+  const uploadImagesToCloudinary = async (newImages) => {
     const cloudinaryUrl =
-      "https://api.cloudinary.com/v1_1/soragatrasambandha/image/upload";
-    const uploadPreset = "syzx315g";
+      "https://api.cloudinary.com/v1_1/devkjwg6r/image/upload";
+    const uploadPreset = "vkxvktv3";
 
-    const imageUrls = await Promise.all(
-      images
-        .filter((image) => image instanceof Blob || image instanceof File)
-        .map(async (image) => {
-          const formData = new FormData();
-          formData.append("file", image);
-          formData.append("upload_preset", uploadPreset);
+    try {
+      const imageUrls = await Promise.all(
+        // binary large object
+        // A Blob is designed to hold binary data, such as images, videos, files, or other types of binary data that are not text-based.
+        newImages
+          .filter((image) => image instanceof Blob || image instanceof File)
+          .map(async (image) => {
+            const formData = new FormData();
+            formData.append("file", image);
+            formData.append("upload_preset", uploadPreset);
 
-          const response = await axios.post(cloudinaryUrl, formData);
-          return response.data.secure_url;
-        })
-    );
-
-    return imageUrls;
+            const response = await axios.post(cloudinaryUrl, formData);
+            // here we retrun response.data.secure_url because we need to pass url to the our database
+            console.log("cloudinary response:", response.data.secure_url);
+            return response.data.secure_url;
+          })
+      );
+      console.log("Uploaded images to Cloudinary:", imageUrls);
+      return imageUrls;
+    } catch (err) {
+      console.error("Error uploading images to Cloudinary:", err);
+    }
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    console.log("Submitting form...");
 
-    const imageUrl = await uploadImagesToCloudinary();
-    console.log(`Uploaded images: ${imageUrl}`);
+    // Separate new images from existing ones
+    const newImages = images.filter(
+      (image) => image instanceof Blob || image instanceof File
+    );
+    const existingImageUrls = images.filter(
+      (image) => typeof image === "string"
+    );
+
+    // Upload new images if any
+    const newImageUrls =
+      newImages.length > 0 ? await uploadImagesToCloudinary(newImages) : [];
+    console.log(`Uploaded new images: ${newImageUrls}`);
+
+    // Combine existing and new image URLs
+    const combinedImageUrls = [...existingImageUrls, ...newImageUrls];
+    console.log(`Combined image URLs: ${combinedImageUrls}`);
+    const imageUrl = combinedImageUrls.filter(
+      (item) => Object.keys(item).length !== 0
+    );
 
     const hotelData = {
-      id: isEditing ? currentHotel.id : String(hotels.length + 1),
-      name: name,
-      price: price,
-      img: isEditing
-        ? [
-            ...images.filter((item) => Object.keys(item).length !== 0),
-            ...imageUrl.filter((item) => Object.keys(item).length !== 0),
-          ]
-        : imageUrl.filter((item) => Object.keys(item).length !== 0),
-      freeCancellation: freeCancellation,
-      reserveNow: reserveNow,
-      desc: description,
+      Name: name,
+      Price: price,
+      ImageUrl: imageUrl,
+      FreeCancellation: freeCancellation,
+      ReserveNow: reserveNow,
+      Description: description,
     };
 
+    // Determine whether to add or update hotel data
     const uploadData = async () => {
       try {
         const response = await axios.post(
-          "http://localhost:3000/hotels",
+          "http://localhost:5039/api/Hotel",
           hotelData
         );
+        console.log("Hotel added:", response);
         setLoading(false);
         fetchHotels();
         resetForm();
-        console.log("This is the response: ", response);
       } catch (err) {
-        console.log(err);
+        console.error("Error adding hotel:", err);
         setLoading(false);
       }
     };
@@ -111,41 +133,61 @@ const ManageHotels = () => {
     const editData = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:3000/hotels/${currentHotel.id}`,
+          `http://localhost:5039/api/Hotel/${id}`,
           hotelData
         );
+        console.log("Hotel updated:", response);
         setLoading(false);
         fetchHotels();
         resetForm();
-        console.log("This is the response: ", response);
       } catch (err) {
-        console.log(err);
+        console.error("Error updating hotel:", err);
         setLoading(false);
       }
     };
 
     isEditing ? editData() : uploadData();
   };
-
+  // Handle hotel editing
+  const handleEdit = (hotel) => {
+    setId(hotel.id);
+    setIsEditing(true);
+    setName(hotel.name);
+    setPrice(hotel.price);
+     
+    // setImages(hotel.imageUrl || []);
+    setFreeCancellation(hotel.freeCancellation);
+    setReserveNow(hotel.reserveNow);
+    setDescription(hotel.description);
+    console.log("Editing hotel:", hotel);
+  };
+  // Reset form fields
   const resetForm = () => {
+    
     setName("");
     setPrice("");
     setImages([]);
     setFreeCancellation(false);
     setReserveNow(false);
     setDescription("");
-    setCurrentHotel(null);
+    // setCurrentHotel(null);
     setIsEditing(false);
+    if (imageInputRef.current) {
+      imageInputRef.current.value = null;
+    }
+    console.log("Form reset");
   };
 
+  // Handle hotel deletion
   const handleDelete = async (id) => {
-    // setHotels((prevHotel) => prevHotel.filter((hotel) => hotel.id !== id));
     try {
-      const response = await axios.delete(`http://localhost:3000/hotels/${id}`);
-      console.log(response);
+      const response = await axios.delete(
+        `http://localhost:5039/api/Hotel/${id}`
+      );
+      console.log("Hotel deleted:", response);
       fetchHotels();
     } catch (err) {
-      console.log(err);
+      console.error("Error deleting hotel:", err);
     }
   };
 
@@ -156,7 +198,7 @@ const ManageHotels = () => {
       transition={{ duration: 0.5 }}
       className="h-full w-full p-6"
     >
-      <div className=" bg-white p-6 rounded shadow-md">
+      <div className="bg-white p-6 rounded shadow-md">
         <h1 className="text-3xl font-bold mb-4">
           {isEditing ? "Edit Hotel" : "Add New Hotel"}
         </h1>
@@ -187,6 +229,7 @@ const ManageHotels = () => {
               type="file"
               multiple
               onChange={handleImageChange}
+              ref={imageInputRef}
               className="w-full p-2 border rounded"
             />
           </div>
@@ -254,17 +297,48 @@ const ManageHotels = () => {
           <table className="min-w-full bg-white">
             <thead>
               <tr>
-                <th className="py-2">Name</th>
-                <th className="py-2">Price</th>
-                <th className="py-2">Actions</th>
+                <th className="border px-2 py-2">S.N</th>
+                <th className="border px-2 py-2">Hotel ID</th>
+                <th className="border px-14 py-2">Name</th>
+                <th className="border px-4 py-2">Price</th>
+                <th className="border px-1 py-2">Free Cancellation</th>
+                <th className="border px-2 py-2">Reserve Now</th>
+                <th className="border px-20 py-2">Description</th>
+                <th className="border px-4 py-2">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {hotels?.map((hotel) => (
-                <tr key={hotel.id}>
-                  <td className="border px-4 py-2">{hotel.name}</td>
-                  <td className="border px-4 py-2">{hotel.price}</td>
-                  <td className="border px-4 py-2">
+              {hotels?.map((hotel, index) => (
+                <tr key={index}>
+                  <td className="border px-1 py-2">{index + 1}</td>
+                  <td className="border px-4 py-2 text-gray-900 font-semibold">
+                    {hotel.id}
+                  </td>
+                  <td className="border px-4 py-2 text-gray-900 font-semibold">
+                    {hotel.name}
+                  </td>
+                  <td className="border px-4 py-2 text-gray-900 font-semibold">
+                    ${hotel.price}
+                  </td>
+                  <td
+                    className={`border px-4 py-2 ${
+                      hotel.freeCancellation ? "text-green-600" : "text-red-600"
+                    } font-medium`}
+                  >
+                    {hotel.freeCancellation ? "Yes" : "No"}
+                  </td>
+                  <td
+                    className={`border px-4 py-2 text-green-600 font-medium ${
+                      hotel.reserveNow ? "text-green-600   " : "text-red-600"
+                    }`}
+                  >
+                    {hotel.reserveNow ? "Yes" : "No"}
+                  </td>
+                  <td className="border px-4 py-2 text-gray-700">
+                    {hotel.description}
+                  </td>
+
+                  <td className="border px-6 py-2">
                     <button
                       onClick={() => handleEdit(hotel)}
                       className="bg-green-500 text-white py-1 px-3 rounded mr-2"
@@ -272,13 +346,12 @@ const ManageHotels = () => {
                       Edit
                     </button>
                   </td>
-                  <td className="border px-4 py-2">
+                  <td className="border px-6 py-2">
                     <button
                       onClick={() => {
                         setOpen(true);
                         setId(hotel.id);
                       }}
-                      // onClick={() => handleDelete(hotel.id)}
                       className="bg-red-500 text-white py-1 px-3 rounded mr-2"
                     >
                       Delete

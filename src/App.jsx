@@ -14,6 +14,7 @@ import NotFound from "./pages/NotFound";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ManageHotels from "./pages/Dashboard/ManageHotels";
 import ManageTravelPackages from "./pages/Dashboard/ManageTravelPackages";
+
 function App() {
   return (
     <>
