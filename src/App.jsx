@@ -23,9 +23,23 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
 
-        {/* Redirect authenticated users away from SignIn and SignUp pages */}
-        <Route path="/signin" element={<SignIn />} />
-        <Route path="/signup" element={<SignUp />} />
+        {/* Redirect authenticated users away from SignIn and SignUp pages update */}
+        <Route
+          path="/signin"
+          element={
+            <RedirectIfAuthenticated>
+              <SignIn />
+            </RedirectIfAuthenticated>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <RedirectIfAuthenticated>
+              <SignUp />
+            </RedirectIfAuthenticated>
+          }
+        />
 
         {/* Protected Routes for User Layout */}
         <Route

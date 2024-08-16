@@ -31,7 +31,7 @@ const SignIn = () => {
         localStorage.setItem('role', role);
         setUser({ role }); // Update user state with role
 
-        console.log("Role:", role); // Ensure this logs the correct role
+        console.log("Role:", role); 
         console.log("Expires In:", expiresIn);
         navigate(role === "Admin" ? "/dashboard" : "/user/home");
       }

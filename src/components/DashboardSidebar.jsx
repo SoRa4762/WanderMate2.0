@@ -10,18 +10,19 @@ const DashboardSidebar = () => {
   const toggleSidebar = () => {
     setOpen(!open);
   };
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const response = await axios.post("http://localhost:5171/api/Auth/logout");
+      const response = await axios.post(
+        "http://localhost:5171/api/Auth/logout"
+      );
       localStorage.removeItem("token");
       localStorage.removeItem("role");
       localStorage.removeItem("expiresIn");
-      navigate("/signin")
+      navigate("/signin");
 
-      console.log(response)
-     
+      console.log(response);
     } catch (error) {
       if (error.response) {
         console.error("Error:", error.response.data);
@@ -36,12 +37,9 @@ const DashboardSidebar = () => {
   return (
     <>
       <div className="flex justify-between items-center p-4 bg-gray-800 text-white">
-        {/* Logo or Brand Name */}
         <h1 className="text-2xl font-bold">WanderMate</h1>
 
-        {/* Right side logout/profile */}
         <div className="flex items-center space-x-4">
-          {/* Profile Icon/Logout Button */}
           <button
             onClick={handleLogout}
             className="bg-blue-600 px-4 py-2 rounded-md text-white hover:bg-blue-800"

@@ -22,7 +22,7 @@ function Protected({ children, allowedRoles }) {
     return <Navigate to="/signin" replace />;
   }
 
-  // Verify token with the backend
+  // Verify token with the backendhe
   const verifyToken = async () => {
     try {
       const response = await axios.get("http://localhost:5171/api/Auth/verify-token", {
