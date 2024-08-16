@@ -1,19 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import userProfile from "../assets/userProfile.jpg";
 import { headerLinks } from "../helper/data";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { motion } from "framer-motion";
+import axios from "axios";
 
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(location.pathname);
   const [showLogout, setShowLogout] = useState(false);
   const [showSideMenu, setShowSideMenu] = useState(false);
+  // const [userName, setUserName] = useState(""); // State for storing user name
+  // useEffect(() => {
+  //   const fetchUserName = async () => {
+  //     try {
+  //       const response = await axios.get("http://localhost:5171/api/User");
+  //       console.log("API Response:", response.data); // Inspect the entire response
+  
+  //       if (response.data && response.data.getUserDto) {
+  //         // Ensure that getUserDto is an array of objects with valid properties
+  //         const usernames = response.data.getUserDto.map(user => {
+  //           // Check if the user object is defined and has a Username property
+  //           return user?.Username || 'Unknown Username';
+  //         });
+  
+  //         console.log("Usernames Array:", usernames);
+  //         setUserName(usernames[0]); // Assuming you want the first username
+  //       }
+  //     } catch (error) {
+  //       console.error(
+  //         "Error fetching user data:",
+  //         error.response?.data || error.message
+  //       );
+  //     }
+  //   };
+  
+  //   fetchUserName();
+  // }, []);
+  
 
-  const handleLogout = () => {
-    navigate("/signin");
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:5171/api/Auth/Logout");
+      localStorage.removeItem("token");
+      localStorage.removeItem("role");
+      localStorage.removeItem("expiresIn");
+      console.log("User logged out successfully!");
+      navigate("/signin");
+    } catch (error) {
+      console.error(
+        "Error logging out:",
+        error.response?.data || error.message
+      );
+    }
   };
 
   const toggleLogout = () => {
@@ -79,7 +119,7 @@ const Header = () => {
             onClick={toggleLogout}
             className="h-full flex items-center gap-2 cursor-pointer"
           >
-            <p>username</p>
+            <p>user</p>
             <img
               className="h-12 w-12 rounded-full"
               src={userProfile}

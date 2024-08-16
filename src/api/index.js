@@ -115,9 +115,9 @@ export const getReview = async (hotelId) => {
   }
 };
 
-export const getUser = async (id) => {
+export const getUser = async () => {
   try {
-    const response = await axios.get(`${backendUrl}/users/${id}`);
+    const response = await axios.get(`http://localhost:5171/api/User/SignUp`);
     const data = await response.data;
     return data;
   } catch (err) {

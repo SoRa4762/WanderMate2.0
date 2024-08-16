@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -6,8 +6,12 @@ import BGImg from "../assets/bg8.jpg";
 import HeaderImage from "../assets/headerImg5.jpg";
 import { landingFooterLinks, landingHeaderLinks } from "../helper/data";
 
+// eslint-disable-next-line react/prop-types
 const LandingPage = () => {
   const [open, setOpen] = useState(false);
+
+
+
   return (
     <>
       {/* encapsulates all */}

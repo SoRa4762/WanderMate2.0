@@ -14,34 +14,55 @@ import NotFound from "./pages/NotFound";
 import DashboardLayout from "./layouts/DashboardLayout";
 import ManageHotels from "./pages/Dashboard/ManageHotels";
 import ManageTravelPackages from "./pages/Dashboard/ManageTravelPackages";
+import RedirectIfAuthenticated from "./pages/Protected/RedirectIfAuthenticated";
+import Protected from "./pages/Protected/Protected";
 
 function App() {
   return (
-    <>
-      <Router>
-        <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/signin" element={<SignIn />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/user" element={<UserLayout />}>
-            <Route path="home" element={<Home />} />
-            <Route path="destination" element={<Destination />} />
-            <Route path="travelpackages" element={<TravelPackages />} />
-            <Route path="travelpackages/:id" element={<TravelPackage />} />
-            <Route path="hotels" element={<Hotels />} />
-            <Route path="hotels/:id" element={<Hotel />} />
-            <Route path="profile/:userId" element={<UserProfile />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route path="manage-hotels" element={<ManageHotels />} />
-            <Route path="manage-packages" element={<ManageTravelPackages />} />
-            <Route path="*" element={<NotFound />} />
-          </Route>
+    <Router>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+
+        {/* Redirect authenticated users away from SignIn and SignUp pages */}
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+
+        {/* Protected Routes for User Layout */}
+        <Route
+          path="/user"
+          element={
+            <Protected allowedRoles={["User"]}>
+              <UserLayout />
+            </Protected>
+          }
+        >
+          <Route path="home" element={<Home />} />
+          <Route path="destination" element={<Destination />} />
+          <Route path="travelpackages" element={<TravelPackages />} />
+          <Route path="travelpackages/:id" element={<TravelPackage />} />
+          <Route path="hotels" element={<Hotels />} />
+          <Route path="hotels/:id" element={<Hotel />} />
+          <Route path="profile/:userId" element={<UserProfile />} />
           <Route path="*" element={<NotFound />} />
-        </Routes>
-      </Router>
-    </>
+        </Route>
+
+        {/* Protected Routes for Admin (Dashboard Layout) */}
+        <Route
+          path="/dashboard"
+          element={
+            <Protected allowedRoles={["Admin"]}>
+              <DashboardLayout />
+            </Protected>
+          }
+        >
+          <Route path="manage-hotels" element={<ManageHotels />} />
+          <Route path="manage-packages" element={<ManageTravelPackages />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </Router>
   );
 }
 
