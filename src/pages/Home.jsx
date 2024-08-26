@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getHotels, getTopDestinations, getTravelPackages } from "../api";
+import { getHotels, getTopDestinations } from "../api";
 import Cards from "../components/Cards";
 import TopHotels from "../assets/bg2.jpg";
 import TopTravelPackage from "../assets/bg5.jpg";
