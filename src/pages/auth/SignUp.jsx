@@ -2,23 +2,10 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../../validation/formValidation";
 import SignUpImage from "../../assets/undraw_signup.svg";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  // const [username, setUsername] = useState("");
-  // const [formData, setFormData] = useState({
-  //   username: "",
-  //   email: "",
-  // });
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({
-  //     ...formData,
-  //     [name]: value,
-  //   });
-  //   console.log(formData);
-  // };
-
   const {
     register,
     handleSubmit,
@@ -26,9 +13,26 @@ const SignUp = () => {
   } = useForm({
     resolver: yupResolver(signUpSchema),
   });
+  const navigate = useNavigate();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = async (data) => {
+    try {
+      const response = await axios.post("http://localhost:5171/api/User/SignUp", data);
+
+      if (response.status === 200) {
+        console.log("User created successfully:", response.data);
+        alert("User created successfully!");
+        navigate("/signin");
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error:", error.response.data);
+        alert(`Error: ${error.response.data}`);
+      } else {
+        console.error("Error during sign up:", error.message);
+        alert(`Error: ${error.message}`);
+      }
+    }
   };
 
   return (
@@ -54,11 +58,6 @@ const SignUp = () => {
                 placeholder="Username"
                 name="username"
                 id="username"
-                // onChange={(e) => {
-                //   setUsername(e.target.value);
-                //   handleChange(e);
-                //   console.log(username);
-                // }}
                 {...register("username")}
               />
               <p className="text-xs lg:text-sm text-red-600 font-semibold pt-1">
@@ -73,9 +72,6 @@ const SignUp = () => {
                 placeholder="Email"
                 name="email"
                 id="email"
-                // onChange={(e) => {
-                //   handleChange(e);
-                // }}
                 {...register("email")}
               />
               <p className="text-xs lg:text-sm text-red-600 font-semibold pt-1">
@@ -108,6 +104,23 @@ const SignUp = () => {
               />
               <p className="text-xs lg:text-sm text-red-600 font-semibold pt-1">
                 {errors.confirmPassword?.message}
+              </p>
+            </div>
+
+            {/* Role Selection */}
+            <div className="w-full">
+              <select
+                className="h-10 md:h-14 pl-4 w-full border-2 border-blue-600 rounded-md focus:border-blue-600"
+                name="role"
+                id="role"
+                {...register("role")}
+                defaultValue="User"
+              >
+                <option value="User">User</option>
+                <option value="Admin">Admin</option>
+              </select>
+              <p className="text-xs lg:text-sm text-red-600 font-semibold pt-1">
+                {errors.role?.message}
               </p>
             </div>
 

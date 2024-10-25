@@ -4,17 +4,23 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "concurrently \"yarn serve:api\" \"vite\"",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "serve:api": "json-server --watch db.json --port 3001"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
     "animate.css": "^4.1.1",
     "axios": "^1.7.2",
     "framer-motion": "^11.3.0",
+<<<<<<< HEAD
     "json-server": "^1.0.0-beta.3",
+=======
+    "json-server": "^1.0.0-beta.1",
+    "jwt-decode": "^4.0.0",
+>>>>>>> 0c33baeedeb3b54b60d337d1779890956b331e18
     "maplibre-gl": "^4.5.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -28,6 +34,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "autoprefixer": "^10.4.19",
+    "concurrently": "^8.2.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",

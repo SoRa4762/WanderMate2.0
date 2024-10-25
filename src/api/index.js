@@ -1,11 +1,13 @@
 import axios from "axios";
-const jsonUrl = "http://localhost:3000";
+const backendUrl = "http://localhost:5039";
 
 //hotels
 export const getHotels = async () => {
   try {
-    const response = await axios.get(`${jsonUrl}/hotels`);
+    const response = await axios.get(`${backendUrl}/api/Hotel`);
     const data = await response.data;
+    // return data;
+    console.log(response.data);
     return data;
   } catch (err) {
     console.log(err);
@@ -14,7 +16,7 @@ export const getHotels = async () => {
 
 export const getHotel = async (id) => {
   try {
-    const response = await axios.get(`${jsonUrl}/hotels/${id}`);
+    const response = await axios.get(`${backendUrl}/hotels/${id}`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -24,7 +26,7 @@ export const getHotel = async (id) => {
 
 export const getHotelReview = async (id) => {
   try {
-    const response = await axios.get(`${jsonUrl}/reviews?hotelId=${id}`);
+    const response = await axios.get(`${backendUrl}/reviews?hotelId=${id}`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -32,10 +34,10 @@ export const getHotelReview = async (id) => {
   }
 };
 
-//travel packages
+// travel packages
 export const getTravelPackages = async () => {
   try {
-    const response = await axios.get(`${jsonUrl}/travelPackages`);
+    const response = await axios.get(`${backendUrl}/travelPackages`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -45,7 +47,7 @@ export const getTravelPackages = async () => {
 
 export const getTravelPackage = async (id) => {
   try {
-    const response = await axios.get(`${jsonUrl}/travelPackages/${id}`);
+    const response = await axios.get(`${backendUrl}/travelPackages/${id}`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -55,7 +57,7 @@ export const getTravelPackage = async (id) => {
 
 export const getThingsToDo = async () => {
   try {
-    const response = await axios.get(`${jsonUrl}/thingsToDo`);
+    const response = await axios.get(`${backendUrl}/thingsToDo`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -65,7 +67,7 @@ export const getThingsToDo = async () => {
 
 export const getThingToDo = async (id) => {
   try {
-    const response = await axios.get(`${jsonUrl}/thingsToDo/${id}`);
+    const response = await axios.get(`${backendUrl}/thingsToDo/${id}`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -75,7 +77,7 @@ export const getThingToDo = async (id) => {
 
 export const getTopDestinations = async () => {
   try {
-    const response = await axios.get(`${jsonUrl}/topDestinations`);
+    const response = await axios.get(`${backendUrl}/topDestinations`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -85,7 +87,7 @@ export const getTopDestinations = async () => {
 
 export const getTopDestination = async (id) => {
   try {
-    const response = await axios.get(`${jsonUrl}/topDestinations/${id}`);
+    const response = await axios.get(`${backendUrl}/topDestinations/${id}`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -95,7 +97,7 @@ export const getTopDestination = async (id) => {
 
 export const getReviews = async () => {
   try {
-    const response = await axios.get(`${jsonUrl}/reviews`);
+    const response = await axios.get(`${backendUrl}/reviews`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -105,7 +107,7 @@ export const getReviews = async () => {
 
 export const getReview = async (hotelId) => {
   try {
-    const response = await axios.get(`${jsonUrl}/reviews/${hotelId}`);
+    const response = await axios.get(`${backendUrl}/reviews/${hotelId}`);
     const data = await response.data;
     return data;
   } catch (err) {
@@ -113,9 +115,9 @@ export const getReview = async (hotelId) => {
   }
 };
 
-export const getUser = async (id) => {
+export const getUser = async () => {
   try {
-    const response = await axios.get(`${jsonUrl}/users/${id}`);
+    const response = await axios.get(`http://localhost:5171/api/User/SignUp`);
     const data = await response.data;
     return data;
   } catch (err) {
